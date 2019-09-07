@@ -52,7 +52,15 @@ namespace DocumentFlow.Controllers
             {
                 db.IncomingDocuments.Add(incomingDocumentModel);
 
-                Upload(upload);
+                //Upload(upload);
+
+                if (upload != null)
+                {
+                    // получаем имя файла
+                    string fileName = LeadResolutionName(incomingDocumentModel) + System.IO.Path.GetFileName(upload.FileName);
+                    // сохраняем файл в папку IncomingDocuments.Files в проекте
+                    upload.SaveAs(Server.MapPath("~/IncomingDocuments.Files/" + fileName));
+                }
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -61,24 +69,9 @@ namespace DocumentFlow.Controllers
             return View(incomingDocumentModel);
         }
 
-        public string LeadResolutionName(string LeadResolution)
+        public static string LeadResolutionName(IncomingDocumentModel incomingDocumentModel)
         {
-            return LeadResolution;
-        }
-
-        /// <summary>
-        /// Обработка загруженного файла
-        /// </summary>
-        /// <param name="upload"></param>
-        public void Upload(HttpPostedFileBase upload)
-        {
-            if (upload != null)
-            {
-                // получаем имя файла
-                string fileName = System.IO.Path.GetFileName(upload.FileName);
-                // сохраняем файл в папку IncomingDocuments.Files в проекте
-                upload.SaveAs(Server.MapPath("~/IncomingDocuments.Files/" + fileName));
-            }
+           return incomingDocumentModel.LeadResolution;
         }
 
 
