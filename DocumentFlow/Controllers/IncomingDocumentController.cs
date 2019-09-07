@@ -61,6 +61,15 @@ namespace DocumentFlow.Controllers
             return View(incomingDocumentModel);
         }
 
+        public string LeadResolutionName(string LeadResolution)
+        {
+            return LeadResolution;
+        }
+
+        /// <summary>
+        /// Обработка загруженного файла
+        /// </summary>
+        /// <param name="upload"></param>
         public void Upload(HttpPostedFileBase upload)
         {
             if (upload != null)
