@@ -23,30 +23,38 @@ namespace DocumentFlow.Models
         /// <summary>
         /// Индекс документа
         /// </summary>
+        /// 
+        [Display(Name = "Индекс документа")]
         public string DocIndex { get; set; }
         /// <summary>
         /// Краткое описание (содержание) документа
         /// </summary>
+        [Display(Name = "Краткое описание")]
         public string Description { get; set; }
         /// <summary>
         /// Автор резолюции
         /// </summary>
+        [Display(Name = "Автор резолюции")]
         public string Author { get; set; }
         /// <summary>
         /// Резолюция руководителя
         /// </summary>
+        [Display(Name = "Резолюция руководителя")]
         public string LeadResolution { get; set; }
         /// <summary>
         /// Срок хранения документа, дней
         /// </summary>
+        [Display(Name = "Срок хранения")]
         public int SaveTime { get; set; }
         /// <summary>
         /// Документ (ссылка на документ)
         /// </summary>
+        [Display(Name = "Документ")]
         public string DocumentFile { get; set; }
         /// <summary>
         /// Статус документа
         /// </summary>
+        [Display(Name = "Статус")]
         public string Status { get; set; }
     }
 }
