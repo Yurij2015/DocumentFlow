@@ -57,7 +57,9 @@ namespace DocumentFlow.Controllers
                 if (upload != null)
                 {
                     // получаем имя файла
-                    string fileName = LeadResolutionName(incomingDocumentModel) + System.IO.Path.GetFileName(upload.FileName);
+                    //string fileName = LeadResolutionName(incomingDocumentModel) + System.IO.Path.GetFileName(upload.FileName);
+                    // получаем расширение файла
+                    string fileName = LeadResolutionName(incomingDocumentModel) + DocIndexName(incomingDocumentModel) + System.IO.Path.GetExtension(upload.FileName);
                     // сохраняем файл в папку IncomingDocuments.Files в проекте
                     upload.SaveAs(Server.MapPath("~/IncomingDocuments.Files/" + fileName));
                 }
@@ -69,9 +71,14 @@ namespace DocumentFlow.Controllers
             return View(incomingDocumentModel);
         }
 
-        public static string LeadResolutionName(IncomingDocumentModel incomingDocumentModel)
+        public string LeadResolutionName(IncomingDocumentModel incomingDocumentModel)
         {
            return incomingDocumentModel.LeadResolution;
+        }
+
+        public string DocIndexName(IncomingDocumentModel incomingDocumentModel)
+        {
+            return incomingDocumentModel.DocIndex;
         }
 
 
