@@ -10,49 +10,49 @@ using DocumentFlow.Models;
 
 namespace DocumentFlow.Controllers
 {
-    public class IncomingDocumentController : Controller
+    public class OutboxDocumentController : Controller
     {
         private DocumentFlowContext db = new DocumentFlowContext();
 
-        // GET: IncomingDocument
+        // GET: OutboxDocument
         public ActionResult Index()
         {
-            return View(db.IncomingDocuments.ToList());
+            return View(db.OutboxDocumentModels.ToList());
         }
 
-        // GET: IncomingDocument/Details/5
+        // GET: OutboxDocument/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IncomingDocumentModel incomingDocumentModel = db.IncomingDocuments.Find(id);
-            if (incomingDocumentModel == null)
+            OutboxDocumentModel outboxDocumentModel = db.OutboxDocumentModels.Find(id);
+            if (outboxDocumentModel == null)
             {
                 return HttpNotFound();
             }
-            return View(incomingDocumentModel);
+            return View(outboxDocumentModel);
         }
 
-        // GET: IncomingDocument/Create
-        [Authorize(Roles = "docmaker")]
+        // GET: OutboxDocument/Create
         public ActionResult Create()
         {
+            //SelectList implementer = new SelectList("Иванов И. И.", "Петров П. П.");
+            //ViewBag.Implementer = implementer;
             return View();
         }
 
-        // POST: IncomingDocument/Create
+        // POST: OutboxDocument/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Date,DocIndex,Description,Author,LeadResolution,SaveTime,DocumentFile,Status")] HttpPostedFileBase upload, IncomingDocumentModel incomingDocumentModel)
+        public ActionResult Create([Bind(Include = "Id,Date,DocIndex,Description,Author,LeadResolution,LeadResolutionLogin,SaveTime,DocumentFile,NoteToDocument,Status")] HttpPostedFileBase upload, OutboxDocumentModel outboxDocumentModel)
         {
             if (ModelState.IsValid)
             {
-                db.IncomingDocuments.Add(incomingDocumentModel);
-
+                db.OutboxDocumentModels.Add(outboxDocumentModel);
                 //Upload(upload);
 
                 if (upload != null)
@@ -60,93 +60,93 @@ namespace DocumentFlow.Controllers
                     // получаем имя файла
                     //string fileName = LeadResolutionName(incomingDocumentModel) + System.IO.Path.GetFileName(upload.FileName);
                     // получаем расширение файла
-                    string fileName = LeadResolutionName(incomingDocumentModel) + DocIndexName(incomingDocumentModel) + System.IO.Path.GetExtension(upload.FileName);
+                    string fileName = LeadResolutionName(outboxDocumentModel) + DocIndexName(outboxDocumentModel) + System.IO.Path.GetExtension(upload.FileName);
                     // сохраняем файл в папку IncomingDocuments.Files в проекте
-                    upload.SaveAs(Server.MapPath("~/IncomingDocuments.Files/" + fileName));
+                    upload.SaveAs(Server.MapPath("~/OutboxDocuments.Files/" + fileName));
                     //определяем название файла для сохранения и последующей загрузки. Переопределение (определение) поля DocumentFile
-                    incomingDocumentModel.DocumentFile = fileName;
+                    outboxDocumentModel.DocumentFile = fileName;
                 }
-
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(incomingDocumentModel);
+            return View(outboxDocumentModel);
         }
+
         /// <summary>
         /// получаем данные поля LeadResolution. Кто назначен для обработки документа
         /// </summary>
-        /// <param name="incomingDocumentModel"></param>
+        /// <param name="outboxDocumentModel"></param>
         /// <returns></returns>
-        public string LeadResolutionName(IncomingDocumentModel incomingDocumentModel)
+        public string LeadResolutionName(OutboxDocumentModel outboxDocumentModel)
         {
-           return incomingDocumentModel.LeadResolution;
+            return outboxDocumentModel.LeadResolution;
         }
 
         /// <summary>
         /// получаем данные поля DocIndexName
         /// </summary>
-        /// <param name="incomingDocumentModel"></param>
+        /// <param name="outboxDocumentModel"></param>
         /// <returns></returns>
-        public string DocIndexName(IncomingDocumentModel incomingDocumentModel)
+        public string DocIndexName(OutboxDocumentModel outboxDocumentModel)
         {
-            return incomingDocumentModel.DocIndex;
+            return outboxDocumentModel.DocIndex;
         }
 
 
-        // GET: IncomingDocument/Edit/5
+        // GET: OutboxDocument/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IncomingDocumentModel incomingDocumentModel = db.IncomingDocuments.Find(id);
-            if (incomingDocumentModel == null)
+            OutboxDocumentModel outboxDocumentModel = db.OutboxDocumentModels.Find(id);
+            if (outboxDocumentModel == null)
             {
                 return HttpNotFound();
             }
-            return View(incomingDocumentModel);
+            return View(outboxDocumentModel);
         }
 
-        // POST: IncomingDocument/Edit/5
+        // POST: OutboxDocument/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Date,DocIndex,Description,Author,LeadResolution,SaveTime,DocumentFile,Status")] IncomingDocumentModel incomingDocumentModel)
+        public ActionResult Edit([Bind(Include = "Id,Date,DocIndex,Description,Author,LeadResolution,LeadResolutionLogin,SaveTime,DocumentFile,NoteToDocument,Status")] OutboxDocumentModel outboxDocumentModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(incomingDocumentModel).State = EntityState.Modified;
+                db.Entry(outboxDocumentModel).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(incomingDocumentModel);
+            return View(outboxDocumentModel);
         }
 
-        // GET: IncomingDocument/Delete/5
+        // GET: OutboxDocument/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IncomingDocumentModel incomingDocumentModel = db.IncomingDocuments.Find(id);
-            if (incomingDocumentModel == null)
+            OutboxDocumentModel outboxDocumentModel = db.OutboxDocumentModels.Find(id);
+            if (outboxDocumentModel == null)
             {
                 return HttpNotFound();
             }
-            return View(incomingDocumentModel);
+            return View(outboxDocumentModel);
         }
 
-        // POST: IncomingDocument/Delete/5
+        // POST: OutboxDocument/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            IncomingDocumentModel incomingDocumentModel = db.IncomingDocuments.Find(id);
-            db.IncomingDocuments.Remove(incomingDocumentModel);
+            OutboxDocumentModel outboxDocumentModel = db.OutboxDocumentModels.Find(id);
+            db.OutboxDocumentModels.Remove(outboxDocumentModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

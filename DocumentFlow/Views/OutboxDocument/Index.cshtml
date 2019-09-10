@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DocumentFlow.Models.IncomingDocumentModel>
+﻿@model IEnumerable<DocumentFlow.Models.OutboxDocumentModel>
 
 @{
     ViewBag.Title = "Система документооборота";
@@ -7,7 +7,7 @@
 <h2>@ViewBag.Title. Панель делопроизводителя</h2>
 
 <p>
-    @Html.ActionLink("Добавить документ", "Create", "IncomingDocument", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Добавить документ", "Create", "OutboxDocument", null, new { @class = "btn btn-default" })
 </p>
 <table class="table">
     <tr>
@@ -34,6 +34,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DocumentFile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoteToDocument)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Status)
@@ -67,15 +70,19 @@
             </td>
             <td>
                 @*@Html.DisplayFor(modelItem => item.DocumentFile)*@
-                <a href="~/IncomingDocuments.Files/@Html.DisplayFor(modelItem => item.DocumentFile)">Скачать файл</a>
+                <a href="~/OutboxDocuments.Files/@Html.DisplayFor(modelItem => item.DocumentFile)">Скачать файл</a>
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoteToDocument)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Детали", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }

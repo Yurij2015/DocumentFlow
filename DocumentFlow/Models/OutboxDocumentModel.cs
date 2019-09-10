@@ -6,7 +6,7 @@ using System.Web;
 
 namespace DocumentFlow.Models
 {
-    public class IncomingDocumentModel
+    public class OutboxDocumentModel
     {
 
         /// <summary>
