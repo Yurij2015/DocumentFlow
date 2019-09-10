@@ -18,7 +18,7 @@ namespace DocumentFlow.Models
         /// </summary>
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd'/'MM'/'yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Дата рождения")]
+        [Display(Name = "Дата добавления документа")]
         public DateTime Date { get; set; }
         /// <summary>
         /// Индекс документа

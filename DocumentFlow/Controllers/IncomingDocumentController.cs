@@ -62,6 +62,8 @@ namespace DocumentFlow.Controllers
                     string fileName = LeadResolutionName(incomingDocumentModel) + DocIndexName(incomingDocumentModel) + System.IO.Path.GetExtension(upload.FileName);
                     // сохраняем файл в папку IncomingDocuments.Files в проекте
                     upload.SaveAs(Server.MapPath("~/IncomingDocuments.Files/" + fileName));
+                    //определяем название файла для сохранения и последующей загрузки
+                    incomingDocumentModel.DocumentFile = fileName;
                 }
 
                 db.SaveChanges();
@@ -70,12 +72,21 @@ namespace DocumentFlow.Controllers
 
             return View(incomingDocumentModel);
         }
-
+        /// <summary>
+        /// получаем данные поля LeadResolution. Кто назначен для обработки документа
+        /// </summary>
+        /// <param name="incomingDocumentModel"></param>
+        /// <returns></returns>
         public string LeadResolutionName(IncomingDocumentModel incomingDocumentModel)
         {
            return incomingDocumentModel.LeadResolution;
         }
 
+        /// <summary>
+        /// получаем данные поля DocIndexName
+        /// </summary>
+        /// <param name="incomingDocumentModel"></param>
+        /// <returns></returns>
         public string DocIndexName(IncomingDocumentModel incomingDocumentModel)
         {
             return incomingDocumentModel.DocIndex;
