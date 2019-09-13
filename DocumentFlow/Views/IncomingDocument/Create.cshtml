@@ -1,17 +1,17 @@
 ﻿@model DocumentFlow.Models.IncomingDocumentModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Добавить документ";
 }
 
-<h2>Create</h2>
+<h2>Добавить документ</h2>
 
 @using (Html.BeginForm("Create", "IncomingDocument", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>IncomingDocumentModel</h4>
+        <h4>Входящие документы</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -53,15 +53,15 @@
                 @Html.ValidationMessageFor(model => model.LeadResolution, "", new { @class = "text-danger" })
             </div>
 
-            <div class="col-md-9">
+            @*<div class="col-md-9">
                 <select id="LeadResolution" name="LeadResolution">
                     <option value="Иванов И. И.">Иванов И. И.</option>
                     <option value="Петров П. П.">Петров П. П.</option>
                 </select>
-            </div>
+            </div>*@
 
             <div class="col-md-9">
-                <select id="LeadResolutionLogin" name='LeadResolutionLogin'>
+                <select id="LeadResolutionLogin" name='LeadResolutionLogin' class="form-control">
                     <option value="ivanovivan@mail.ru">Иванов И. И.</option>
                     <option value="petrovoleg@mail.ru">Петров П. П.</option>
                 </select>
@@ -98,7 +98,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-3 col-md-9">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Сохранить" class="btn btn-default" />
             </div>
         </div>
     </div>

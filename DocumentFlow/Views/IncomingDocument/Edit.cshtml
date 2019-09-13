@@ -1,18 +1,18 @@
 ﻿@model DocumentFlow.Models.IncomingDocumentModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Редактировать";
 }
 
-<h2>Edit</h2>
+<h2>Редактировать</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>IncomingDocumentModel</h4>
+        <h4>Входящие документы</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -20,7 +20,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                <p style="color: red; font-size: 12px;">Сохраненная дата - @Html.ViewData.Model.Date</p>
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control disabled" } })
                 @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -58,6 +59,14 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.LeadResolutionLogin, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LeadResolutionLogin, new { htmlAttributes = new { @class = "form-control disabled", @readonly = true } })
+                @Html.ValidationMessageFor(model => model.LeadResolutionLogin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.SaveTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SaveTime, new { htmlAttributes = new { @class = "form-control" } })
@@ -68,8 +77,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DocumentFile, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DocumentFile, new { htmlAttributes = new { @class = "form-control disabled",  @readonly=true  } })
+                @Html.EditorFor(model => model.DocumentFile, new { htmlAttributes = new { @class = "form-control disabled", @readonly = true } })
                 @Html.ValidationMessageFor(model => model.DocumentFile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NoteToDocument, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NoteToDocument, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NoteToDocument, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -83,14 +100,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Сохранить" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Назад", "Index", "IncomingDocument", null, new { @class = "btn btn-default" })
 </div>
 
 @section Scripts {

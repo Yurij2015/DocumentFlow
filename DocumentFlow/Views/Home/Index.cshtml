@@ -3,29 +3,42 @@
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <p><img src="~/Image/documentflow.png" width="280" class="img-responsive pull-right"></p>
+    <h1>BizDoc</h1>
+    <p class="lead">Система документооборота</p>
+    <p>
+        Документооборот — деятельность по организации движения документов на предприятии
+        с момента их создания или получения до завершения исполнения: отправки из организации и (или) направления в архив.
+    </p>
+    <p><a href="IncomingDocument/" class="btn btn-primary btn-lg">Документы &raquo;</a></p>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
+    <div class="col-md-6">
+        <h2>Входящие документы</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            Управление входящими документами. Установка статусов, добавление документов, назначение исполнителей
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p><a class="btn btn-default" href="IncomingDocument/">Перейти в документы &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="col-md-6">
+        <h2>Исходящие документы</h2>
+        <p>
+            Управление исходящими документами. Установка статусов, добавление документов, добавление примечаний
+
+        </p>
+        <p><a class="btn btn-default" href="OutboxDocument/">Перейти в документы &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="col-lg-12">
+        <hr />
+
+        <p class="lead">
+            Для организации электронного документооборота на сервере организации создается база данных, где хранятся все созданные документы.
+        </p><p>
+            Доступ к базе данных осуществляется через браузер (как правило, поддержку браузера определяет разработчик созданного интерфейса).
+            Возможен доступ как по локальной сети (внутренней), так и через интернет (внешний).
+            Документы сохраняются или загружаются в определённые выделенные папки организации.
+            Создавать, модифицировать, удалять созданные документы имеет право лицо, наделённое соответствующими правами.
+        </p>
     </div>
 </div>
