@@ -1,10 +1,10 @@
 ﻿@model DocumentFlow.Models.OutboxDocumentModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Редактировать";
 }
 
-<h2>Edit</h2>
+<h2>Редактировать</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>OutboxDocumentModel</h4>
+        <h4>Исходящие документы</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Date, new { htmlAttributes = new {@type = "text", @class = "form-control" } })
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @type = "text", @class = "form-control disabled", @readonly = true } })
                 @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -28,7 +28,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DocIndex, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DocIndex, new { htmlAttributes = new { @class = "form-control" } })
+                @if (User.IsInRole("viewer"))
+                {
+                    @Html.EditorFor(model => model.DocIndex, new { htmlAttributes = new { @class = "form-control disabled", @readonly = true } })
+                }
+                else
+                {
+                    @Html.EditorFor(model => model.DocIndex, new { htmlAttributes = new { @class = "form-control" } })
+                }
                 @Html.ValidationMessageFor(model => model.DocIndex, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -36,7 +43,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @if (User.IsInRole("viewer"))
+                {
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control disabled", @readonly = true } })
+                }
+                else
+                {
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                }
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -44,7 +58,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Author, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
+                @if (User.IsInRole("viewer"))
+                {
+                    @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control disabled", @readonly = true } })
+                }
+                else
+                {
+                    @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
+                }
+
                 @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -52,23 +74,38 @@
         <div class="form-group">
             @Html.LabelFor(model => model.LeadResolution, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.LeadResolution, new { htmlAttributes = new { @class = "form-control" } })
+                @if (User.IsInRole("viewer"))
+                {
+                    @Html.EditorFor(model => model.LeadResolution, new { htmlAttributes = new { @class = "form-control disabled", @readonly = true } })
+                }
+                else
+                {
+                    @Html.EditorFor(model => model.LeadResolution, new { htmlAttributes = new { @class = "form-control" } })
+                }
                 @Html.ValidationMessageFor(model => model.LeadResolution, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LeadResolutionLogin, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LeadResolutionLogin, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LeadResolutionLogin, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.LeadResolutionLogin, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LeadResolutionLogin, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LeadResolutionLogin, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.SaveTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SaveTime, new { htmlAttributes = new { @class = "form-control" } })
+                @if (User.IsInRole("viewer"))
+                {
+                    @Html.EditorFor(model => model.SaveTime, new { htmlAttributes = new { @class = "form-control disabled", @readonly = true } })
+                }
+                else
+                {
+                    @Html.EditorFor(model => model.SaveTime, new { htmlAttributes = new { @class = "form-control" } })
+
+                }
                 @Html.ValidationMessageFor(model => model.SaveTime, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -76,7 +113,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DocumentFile, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DocumentFile, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DocumentFile, new { htmlAttributes = new { @class = "form-control disabled", @readonly = true } })
                 @Html.ValidationMessageFor(model => model.DocumentFile, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -107,14 +144,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Сохранить" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Назад", "Index", "OutboxDocument", null, new { @class = "btn btn-default" })
 </div>
 
 @section Scripts {
