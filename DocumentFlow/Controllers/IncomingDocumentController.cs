@@ -103,6 +103,9 @@ namespace DocumentFlow.Controllers
 
 
         // GET: IncomingDocument/Edit/5
+        [Authorize(Roles = "docmaker")]
+        [Authorize(Roles = "implementer")]
+        [Authorize(Roles = "viewer")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -134,6 +137,7 @@ namespace DocumentFlow.Controllers
         }
 
         // GET: IncomingDocument/Delete/5
+        [Authorize(Roles = "docmaker")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

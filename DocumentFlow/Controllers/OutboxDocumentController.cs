@@ -10,6 +10,16 @@ using DocumentFlow.Models;
 
 namespace DocumentFlow.Controllers
 {
+    public static class CustomRoles
+    {
+        public const string Docmaker = "docmaker";
+        public const string Viewer = "viewer";
+    }
+    /// <summary>
+    /// Доступ только пользователям с ролями docmaker и viewer
+    /// </summary>
+    //[Authorize(Roles = "docmaker")]
+    [Authorize(Roles = CustomRoles.Docmaker + "," + CustomRoles.Viewer)]
     public class OutboxDocumentController : Controller
     {
         private DocumentFlowContext db = new DocumentFlowContext();

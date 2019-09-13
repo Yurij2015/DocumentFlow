@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>OutboxDocumentModel</h4>
         <hr />
@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new {@type = "text", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -92,8 +92,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                @if (User.IsInRole("viewer"))
+                {
+                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control disabled", @readonly = true } })
+                }
+                else
+                {
+                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                }
                 @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+
             </div>
         </div>
 
