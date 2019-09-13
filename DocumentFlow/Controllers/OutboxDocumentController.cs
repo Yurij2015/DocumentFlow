@@ -17,7 +17,9 @@ namespace DocumentFlow.Controllers
         // GET: OutboxDocument
         public ActionResult Index()
         {
+            //return View(db.OutboxDocumentModels.Where(o => o.LeadResolutionLogin.Contains(User.Identity.Name)).ToList());
             return View(db.OutboxDocumentModels.ToList());
+
         }
 
         // GET: OutboxDocument/Details/5
@@ -38,8 +40,6 @@ namespace DocumentFlow.Controllers
         // GET: OutboxDocument/Create
         public ActionResult Create()
         {
-            //SelectList implementer = new SelectList("Иванов И. И.", "Петров П. П.");
-            //ViewBag.Implementer = implementer;
             return View();
         }
 

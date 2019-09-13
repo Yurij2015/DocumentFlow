@@ -17,7 +17,15 @@ namespace DocumentFlow.Controllers
         // GET: IncomingDocument
         public ActionResult Index()
         {
-            return View(db.IncomingDocuments.ToList());
+            if (User.Identity.Name == "ivanovivan@mail.ru" || User.Identity.Name == "petrovoleg@mail.ru")
+            {
+                return View(db.IncomingDocuments.Where(o => o.LeadResolutionLogin.Contains(User.Identity.Name)).ToList());
+            }
+            else
+            {
+                return View(db.IncomingDocuments.ToList());
+            }
+
         }
 
         // GET: IncomingDocument/Details/5
@@ -80,7 +88,7 @@ namespace DocumentFlow.Controllers
         /// <returns></returns>
         public string LeadResolutionName(IncomingDocumentModel incomingDocumentModel)
         {
-           return incomingDocumentModel.LeadResolution;
+            return incomingDocumentModel.LeadResolution;
         }
 
         /// <summary>
