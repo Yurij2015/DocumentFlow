@@ -187,6 +187,10 @@
     <Compile Include="Migrations\201909101519354_Add outbox model.Designer.cs">
       <DependentUpon>201909101519354_Add outbox model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909271531082_Add new type for date.cs" />
+    <Compile Include="Migrations\201909271531082_Add new type for date.Designer.cs">
+      <DependentUpon>201909271531082_Add new type for date.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DocumentFlowContext.cs" />
@@ -292,6 +296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909101519354_Add outbox model.resx">
       <DependentUpon>201909101519354_Add outbox model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909271531082_Add new type for date.resx">
+      <DependentUpon>201909271531082_Add new type for date.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

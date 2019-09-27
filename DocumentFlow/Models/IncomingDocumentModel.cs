@@ -48,10 +48,12 @@ namespace DocumentFlow.Models
         [Display(Name = "Логин пользователя")]
         public string LeadResolutionLogin { get; set; }
         /// <summary>
-        /// Срок хранения документа, дней
+        /// Срок хранения документа, до даты
         /// </summary>
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Срок хранения")]
-        public int SaveTime { get; set; }
+        public DateTime SaveTime { get; set; }
         /// <summary>
         /// Документ (ссылка на документ)
         /// </summary>
