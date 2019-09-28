@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <p style="color: red; font-size: 12px;">Сохраненная дата - @Html.ViewData.Model.Date</p>
+                @*<p style="color: red; font-size: 12px;">Сохраненная дата - @Html.ViewData.Model.Date</p>*@
                 @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
             </div>
@@ -136,10 +136,18 @@
                 }
                 else
                 {
-                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                    <p style="color: red; font-size: 12px;">Текущий статус - @Html.ViewData.Model.Status</p>
+                    @*@Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })*@
+                    <select id="Status" name='Status' class="form-control">
+                        <option value="@Html.ViewData.Model.Status" selected>@Html.ViewData.Model.Status</option>
+                        <option value="Выполнен">Выполнен</option>
+                        <option value="На выполнении">На выполнении</option>
+                        <option value="На выполнении">На рассмотрении</option>
+                        <option value="Пауза">Пауза</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
                 }
                 @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-
             </div>
         </div>
 
