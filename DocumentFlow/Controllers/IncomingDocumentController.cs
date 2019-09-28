@@ -100,20 +100,25 @@ namespace DocumentFlow.Controllers
                 db.SaveChanges();
 
                 // Отправка электронной почты при создании задачи
-                MailMessage Msg = new MailMessage();
-                Msg.From = new MailAddress("DocumentFlow@gmail.com", "DocumentFlow");// Данные организации
-                Msg.Subject = "Contact";
-                Msg.To.Add(LeadResolutionLogin(incomingDocumentModel)); // email 
-                Msg.Body = "Вы получили новое задание!";
-                Msg.IsBodyHtml = true;
-                Msg.Priority = MailPriority.High;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.gmail.com"; // Добавить рабочие данные
-                smtp.Port = 587; // Добавить рабочие данные
-                smtp.Credentials = new System.Net.NetworkCredential("DocumentFlow@gmail.com", "password");// вставить корректрые данные
-                smtp.EnableSsl = true;
-                smtp.Timeout = 20000;
-                smtp.Send(Msg);
+
+                //MailMessage Msg = new MailMessage
+                //{
+                //    From = new MailAddress("DocumentFlow@gmail.com", "DocumentFlow"),// Данные организации
+                //    Subject = "Contact"
+                //};
+                //Msg.To.Add(LeadResolutionLogin(incomingDocumentModel)); // email 
+                //Msg.Body = "Вы получили новое задание!";
+                //Msg.IsBodyHtml = true;
+                //Msg.Priority = MailPriority.High;
+                //SmtpClient smtp = new SmtpClient
+                //{
+                //    Host = "smtp.gmail.com", // Добавить рабочие данные
+                //    Port = 587, // Добавить рабочие данные
+                //    Credentials = new System.Net.NetworkCredential("DocumentFlow@gmail.com", "password"),// вставить корректрые данные
+                //    EnableSsl = true,
+                //    Timeout = 20000
+                //};
+                //smtp.Send(Msg);
 
                 return RedirectToAction("Index");
             }
