@@ -48,9 +48,12 @@
         <th class="text-center">
             @Html.DisplayNameFor(model => model.LeadResolution)
         </th>
-        <th class="text-center">
-            @Html.DisplayNameFor(model => model.LeadResolutionLogin)
-        </th>
+        @if (User.IsInRole("viewer") || User.IsInRole("docmaker"))
+        {
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.LeadResolutionLogin)
+            </th>
+        }
         <th class="text-center">
             @Html.DisplayNameFor(model => model.SaveTime)
         </th>
@@ -90,9 +93,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.LeadResolution)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LeadResolutionLogin, new { htmlAttributes = new { @class = "text-center" } })
-            </td>
+            @if (User.IsInRole("viewer") || User.IsInRole("docmaker"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.LeadResolutionLogin, new { htmlAttributes = new { @class = "text-center" } })
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.SaveTime)
             </td>
