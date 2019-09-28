@@ -16,15 +16,22 @@ namespace DocumentFlow.Controllers
         private DocumentFlowContext db = new DocumentFlowContext();
 
         // GET: IncomingDocument
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
+            var documents = from d in db.IncomingDocuments select d;
+
             if (User.Identity.Name == "ivanovivan@mail.ru" || User.Identity.Name == "petrovoleg@mail.ru")
             {
                 return View(db.IncomingDocuments.Where(o => o.LeadResolutionLogin.Contains(User.Identity.Name)).ToList());
             }
             else
             {
-                return View(db.IncomingDocuments.ToList());
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    documents = documents.Where(i => i.DocIndex.Contains(searchString));
+                }
+                //return View(db.IncomingDocuments.ToList());
+                return View(documents.ToList());
             }
 
         }
