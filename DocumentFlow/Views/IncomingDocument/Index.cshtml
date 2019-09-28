@@ -44,9 +44,12 @@
         <th class="text-center">
             @Html.DisplayNameFor(model => model.SaveTime)
         </th>
-        <th class="text-center">
-            Осталось дней
-        </th>
+        @if (User.IsInRole("viewer") || User.IsInRole("docmaker"))
+        {
+            <th class="text-center">
+                Осталось дней
+            </th>
+        }
         <th class="text-center">
             @Html.DisplayNameFor(model => model.DocumentFile)
         </th>
@@ -78,18 +81,21 @@
                 @Html.DisplayFor(modelItem => item.LeadResolution)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LeadResolutionLogin, new { htmlAttributes = new { @class = "text-center" } }) 
+                @Html.DisplayFor(modelItem => item.LeadResolutionLogin, new { htmlAttributes = new { @class = "text-center" } })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SaveTime)
             </td>
-            <td class="text-center">
-                @(item.SaveTime.Subtract(DateTime.Today).TotalDays)
-                @if ((item.SaveTime.Subtract(DateTime.Today).TotalDays) < 0)
-                {
-                    <p style="color: red">Просрочен</p>
-                }
-            </td>
+            @if (User.IsInRole("viewer") || User.IsInRole("docmaker"))
+            {
+                <td class="text-center">
+                    @(item.SaveTime.Subtract(DateTime.Today).TotalDays)
+                    @if ((item.SaveTime.Subtract(DateTime.Today).TotalDays) < 0)
+                    {
+                        <p style="color: red">Просрочен</p>
+                    }
+                </td>
+            }
             <td>
                 @*@Html.DisplayFor(modelItem => item.DocumentFile)*@
                 <a href="~/IncomingDocuments.Files/@Html.DisplayFor(modelItem => item.DocumentFile)">Скачать файл</a>
