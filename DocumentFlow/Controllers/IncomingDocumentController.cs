@@ -22,6 +22,11 @@ namespace DocumentFlow.Controllers
 
             if (User.Identity.Name == "ivanovivan@mail.ru" || User.Identity.Name == "petrovoleg@mail.ru")
             {
+                int newcounttask = db.IncomingDocuments.Where(o => o.LeadResolutionLogin.Contains(User.Identity.Name)).Where(d => d.Date == DateTime.Today).Count();
+
+                int counttask = db.IncomingDocuments.Where(o => o.LeadResolutionLogin.Contains(User.Identity.Name)).Count();
+                ViewBag.CountTask = counttask;
+                ViewBag.NewCountTask = newcounttask;
                 return View(db.IncomingDocuments.Where(o => o.LeadResolutionLogin.Contains(User.Identity.Name)).ToList());
             }
             else

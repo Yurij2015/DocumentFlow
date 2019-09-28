@@ -13,7 +13,7 @@
 {
     <form asp-controller="IncomingDocumentController" asp-action="Index">
         <div class="input-group">
-            <input type="text" name="SearchString" class="form-control" placeholder="Поиск по индексу документа">
+            <input type="text" name="SearchString" class="form-control" placeholder="Поиск по индексу документа" style="width: 300px">
             <span class="input-group-btn" style="width:0;">
                 <button class="btn btn-default" type="submit">Фильтр</button>
             </span>
@@ -21,6 +21,16 @@
     </form>
     <br />
 }
+
+@if (User.IsInRole("implementer"))
+{
+    <div style="border:dashed 1px green; width:400px; padding: 5px; background-color:aquamarine">
+        <h5>Количество задач пользователя: <span style="font-weight:bold; color:red">@ViewBag.CountTask</span></h5>
+        <h5>Количество новых задач пользователя:  <span style="font-weight:bold; color:red">@ViewBag.NewCountTask</span></h5>
+    </div>
+    <br />
+}
+
 <table class="table">
     <tr>
         <th class="text-center">
