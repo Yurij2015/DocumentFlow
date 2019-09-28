@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using DocumentFlow.Models;
@@ -96,8 +97,24 @@ namespace DocumentFlow.Controllers
                     //определяем название файла для сохранения и последующей загрузки. Переопределение (определение) поля DocumentFile
                     incomingDocumentModel.DocumentFile = fileName;
                 }
-
                 db.SaveChanges();
+
+                // Отправка электронной почты при создании задачи
+                MailMessage Msg = new MailMessage();
+                Msg.From = new MailAddress("DocumentFlow@gmail.com", "DocumentFlow");// Данные организации
+                Msg.Subject = "Contact";
+                Msg.To.Add(LeadResolutionLogin(incomingDocumentModel)); // email 
+                Msg.Body = "Вы получили новое задание!";
+                Msg.IsBodyHtml = true;
+                Msg.Priority = MailPriority.High;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com"; // Добавить рабочие данные
+                smtp.Port = 587; // Добавить рабочие данные
+                smtp.Credentials = new System.Net.NetworkCredential("DocumentFlow@gmail.com", "password");// вставить корректрые данные
+                smtp.EnableSsl = true;
+                smtp.Timeout = 20000;
+                smtp.Send(Msg);
+
                 return RedirectToAction("Index");
             }
 
